@@ -359,3 +359,106 @@ body {
   .portfolio-footer p {
     margin: 0;
   }
+
+
+
+  /* =========================================
+   PRINT STYLES (BONUS: RÉSUMÉ VIEW)
+   ========================================= */
+@media print {
+    /* 1. Hide web-only elements to save ink and space */
+    header, 
+    #contact, 
+    .portfolio-footer, 
+    .skip-link,
+    .project-actions {
+      display: none !important;
+    }
+  
+    /* 2. Reset backgrounds and colors for paper */
+    body, 
+    .about-section, 
+    .projects-section, 
+    .about-card, 
+    .project-card,
+    .hero-section {
+      background: transparent !important;
+      background-color: #fff !important;
+      color: #000 !important;
+      box-shadow: none !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+  
+    /* 3. Reformat the Hero Section for print */
+    .hero-section {
+      min-height: auto !important; /* Removes the full-screen height */
+      padding-top: 2rem !important;
+      padding-bottom: 1rem !important;
+      page-break-after: avoid;
+    }
+  
+    /* Force Hero text to be black instead of white */
+    .hero-section h1, 
+    .hero-section p {
+      color: #000 !important; 
+      text-shadow: none !important;
+    }
+  
+    /* 4. Adjust the About Section */
+    .about-section {
+      padding-bottom: 1rem !important;
+    }
+    
+    .profile-img {
+      width: 100px !important; /* Scale down the image */
+      height: 100px !important;
+      border: 2px solid #000 !important;
+    }
+  
+    /* Make badges outline-style instead of solid dark blocks */
+    .custom-badge {
+      border: 1px solid #000;
+      color: #000 !important;
+      background-color: transparent !important;
+    }
+  
+    /* 5. Condense the Projects Grid to fit one page */
+    .projects-section {
+      page-break-before: auto;
+    }
+  
+    .projects-grid {
+      display: flex !important;
+      flex-wrap: wrap !important;
+    }
+  
+    /* Force projects into 3 columns strictly on paper */
+    .projects-grid > div {
+      flex: 0 0 33.333% !important;
+      max-width: 33.333% !important;
+    }
+  
+    .project-card {
+      border: 1px solid #ccc !important;
+      page-break-inside: avoid;
+    }
+  
+    .project-img {
+      height: 120px !important; /* Smaller images to save physical space */
+    }
+  
+    .project-content {
+      padding: 0.75rem !important;
+    }
+  
+    /* 6. Typography and Page adjustments for paper */
+    @page {
+      margin: 1cm; /* Standard print margins */
+    }
+  
+    h1, h2, h3, p, li {
+      page-break-inside: avoid; /* Prevents text from splitting across pages */
+    }
+  }
