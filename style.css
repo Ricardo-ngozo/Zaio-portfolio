@@ -28,6 +28,13 @@
     --primary-color: #0d6efd;
     --primary-color-soft: #3d8bfd;
     --bg-highlight: rgba(13, 110, 253, 0.1);
+  
+    /* Liquid glass tokens */
+    --glass-bg: rgba(255, 255, 255, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-highlight: rgba(255, 255, 255, 0.85);
+    --glass-blur: 18px;
+    --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
   }
   
   /* CONDITION A: Trigger Dark Mode automatically via System Preferences */
@@ -55,6 +62,12 @@
       --primary-color: #3d8bfd;
       --primary-color-soft: #6ba6ff;
       --bg-highlight: rgba(61, 139, 253, 0.18);
+  
+      --glass-bg: rgba(30, 30, 30, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-highlight: rgba(255, 255, 255, 0.18);
+      --glass-blur: 18px;
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
     }
   }
   
@@ -84,6 +97,12 @@
     --primary-color: #3d8bfd;
     --primary-color-soft: #6ba6ff;
     --bg-highlight: rgba(61, 139, 253, 0.18);
+  
+    --glass-bg: rgba(30, 30, 30, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-highlight: rgba(255, 255, 255, 0.18);
+    --glass-blur: 18px;
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
   }
   
   /* If the toggle is unchecked, force light mode even when the OS is in
@@ -111,6 +130,12 @@
     --primary-color: #0d6efd;
     --primary-color-soft: #3d8bfd;
     --bg-highlight: rgba(13, 110, 253, 0.1);
+  
+    --glass-bg: rgba(255, 255, 255, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-highlight: rgba(255, 255, 255, 0.85);
+    --glass-blur: 18px;
+    --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
   }
   
   /* =========================================
@@ -124,6 +149,11 @@
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     scroll-behavior: smooth;
     background-color: var(--bg-page);
+    background-image:
+      radial-gradient(circle at 15% 20%, var(--bg-highlight) 0%, transparent 45%),
+      radial-gradient(circle at 85% 60%, var(--bg-highlight) 0%, transparent 40%),
+      radial-gradient(circle at 50% 90%, var(--bg-highlight) 0%, transparent 35%);
+    background-attachment: fixed;
     color: var(--text-main);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
@@ -163,8 +193,11 @@
      4. NAVIGATION MENU LAYOUT
      ========================================= */
   .portfolio-header {
-    background-color: var(--bg-card);
-    border-bottom: 1px solid var(--border-color);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
     transition: background-color 0.3s ease, border-color 0.3s ease;
   }
   
@@ -214,7 +247,9 @@
   }
   
   .theme-toggle-label {
-    background-color: var(--toggle-track);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     width: 54px;
     height: 28px;
     border-radius: 50rem;
@@ -224,12 +259,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: background-color 0.25s ease, border-color 0.3s ease;
   }
   
   .theme-toggle-label .bi-sun-fill { color: #ffc107; font-size: 0.85rem; position: relative; z-index: 1; }
-  .theme-toggle-label .bi-moon-fill { color: #f8f9fa; font-size: 0.85rem; position: relative; z-index: 1; }
+  .theme-toggle-label .bi-moon-fill { color: var(--text-main); font-size: 0.85rem; position: relative; z-index: 1; }
   
   .theme-toggle-label .switch-ball {
     background-color: var(--toggle-ball);
@@ -276,8 +312,11 @@
   .hero-eyebrow {
     display: inline-block;
     color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
     padding: 0.4rem 1.1rem;
     border-radius: 50rem;
     font-size: 0.85rem;
@@ -306,10 +345,12 @@
   }
   
   .about-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-card);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
     border-radius: 1.5rem;
-    box-shadow: 0 0.5rem 1.5rem var(--shadow-color);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
     padding: 2rem;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
@@ -396,12 +437,16 @@
   }
   
   .custom-badge {
-    background-color: var(--badge-bg);
-    color: var(--badge-text);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
     padding: 0.5rem 1rem;
     font-weight: 500;
     border-radius: 0.4rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
   
   .about-text-column {
@@ -447,24 +492,30 @@
      ========================================= */
   .projects-section {
     background-color: var(--bg-card);
+    background-image:
+      radial-gradient(circle at 20% 30%, var(--bg-highlight) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, var(--bg-highlight) 0%, transparent 50%);
     padding: 5rem 0;
     transition: background-color 0.3s ease;
   }
   
   .project-card {
-    background-color: var(--bg-page);
-    border: 1px solid var(--border-card);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
     border-radius: 1rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     height: 100%;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
   }
   
   .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1.5rem var(--shadow-color-strong);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
   }
   
   .project-img {
@@ -514,8 +565,10 @@
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
     color: var(--text-main);
-    border-color: var(--border-color);
-    background: transparent;
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-color: var(--glass-border);
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   }
   .custom-icon-btn:hover {
@@ -541,11 +594,13 @@
   }
   
   .contact-form {
-    background-color: var(--bg-card);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     padding: 2.5rem;
     border-radius: 1rem;
-    border: 1px solid var(--border-card);
-    box-shadow: 0 0.5rem 1.5rem var(--shadow-color);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
   
@@ -554,8 +609,10 @@
     padding: 1rem 1.25rem;
     font-size: 1rem;
     color: var(--text-main);
-    background-color: var(--input-bg);
-    border: 1px solid var(--border-color);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
     border-radius: 0.5rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.3s ease, color 0.3s ease;
   }
@@ -566,7 +623,7 @@
   
   .custom-input:focus {
     outline: none;
-    background-color: var(--input-bg);
+    background-color: var(--glass-bg);
     border-color: var(--primary-color-soft);
     box-shadow: 0 0 0 0.25rem var(--bg-highlight);
   }
@@ -635,9 +692,15 @@
     .projects-section,
     .about-card,
     .project-card,
+    .contact-form,
+    .custom-input,
+    .custom-badge,
     .hero-section {
       background: transparent !important;
       background-color: #fff !important;
+      background-image: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
       color: #000 !important;
       box-shadow: none !important;
       border: none !important;
