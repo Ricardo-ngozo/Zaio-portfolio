@@ -6,47 +6,136 @@
 :root {
     --bg-page: #f8f9fa;
     --bg-card: #ffffff;
+    --bg-elevated: #ffffff;
     --text-main: #212529;
     --text-muted: #6c757d;
     --border-color: #dee2e6;
     --border-card: #e9ecef;
-    --input-bg: #f8f9fa;
+    --input-bg: #ffffff;
     --link-color: #495057;
     --badge-bg: #212529;
     --badge-text: #ffffff;
-    
+    --footer-bg: #212529;
+    --footer-text: rgba(255, 255, 255, 0.7);
+    --shadow-color: rgba(0, 0, 0, 0.075);
+    --shadow-color-strong: rgba(0, 0, 0, 0.2);
+    --hero-overlay-from: rgba(10, 12, 16, 0.55);
+    --hero-overlay-to: rgba(10, 12, 16, 0.78);
+    --toggle-track: #212529;
+    --toggle-ball: #ffffff;
+  
     /* Primary accents stay brand-consistent */
     --primary-color: #0d6efd;
+    --primary-color-soft: #3d8bfd;
     --bg-highlight: rgba(13, 110, 253, 0.1);
   }
   
-  /* Automatic Dark Mode Overrides */
+  /* CONDITION A: Trigger Dark Mode automatically via System Preferences */
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg-page: #121212;         /* Deep dark canvas background */
-      --bg-card: #1e1e1e;         /* Elevated surface card background */
-      --text-main: #f8f9fa;       /* Bright readable text */
-      --text-muted: #a0a0a0;      /* Muted secondary text */
-      --border-color: #2d2d2d;    /* Subtle dark separators */
-      --border-card: #333333;     /* Sleek project card outlines */
-      --input-bg: #2a2a2a;        /* Form input focus background */
-      --link-color: #adb5bd;      /* Muted utility links */
-      --badge-bg: #f8f9fa;        /* Inverted badge colors for readability */
+      --bg-page: #121212;
+      --bg-card: #1e1e1e;
+      --bg-elevated: #242424;
+      --text-main: #f8f9fa;
+      --text-muted: #a8a8a8;
+      --border-color: #2d2d2d;
+      --border-card: #333333;
+      --input-bg: #2a2a2a;
+      --link-color: #c4c8cc;
+      --badge-bg: #f8f9fa;
       --badge-text: #121212;
-      --bg-highlight: rgba(13, 110, 253, 0.25); /* Enhanced contrast indicator text background */
+      --footer-bg: #0a0a0a;
+      --footer-text: rgba(255, 255, 255, 0.6);
+      --shadow-color: rgba(0, 0, 0, 0.4);
+      --shadow-color-strong: rgba(0, 0, 0, 0.6);
+      --hero-overlay-from: rgba(0, 0, 0, 0.65);
+      --hero-overlay-to: rgba(0, 0, 0, 0.88);
+      --toggle-track: #3a3a3a;
+      --toggle-ball: #f8f9fa;
+      --primary-color: #3d8bfd;
+      --primary-color-soft: #6ba6ff;
+      --bg-highlight: rgba(61, 139, 253, 0.18);
     }
+  }
+  
+  /* CONDITION B: Manual override via the CSS-only toggle.
+     Scoped at :root so every custom property cascades into every
+     section, card, form, and component below — no JS required. */
+  :root:has(#theme-toggle:checked) {
+    --bg-page: #121212;
+    --bg-card: #1e1e1e;
+    --bg-elevated: #242424;
+    --text-main: #f8f9fa;
+    --text-muted: #a8a8a8;
+    --border-color: #2d2d2d;
+    --border-card: #333333;
+    --input-bg: #2a2a2a;
+    --link-color: #c4c8cc;
+    --badge-bg: #f8f9fa;
+    --badge-text: #121212;
+    --footer-bg: #0a0a0a;
+    --footer-text: rgba(255, 255, 255, 0.6);
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --shadow-color-strong: rgba(0, 0, 0, 0.6);
+    --hero-overlay-from: rgba(0, 0, 0, 0.65);
+    --hero-overlay-to: rgba(0, 0, 0, 0.88);
+    --toggle-track: #3a3a3a;
+    --toggle-ball: #f8f9fa;
+    --primary-color: #3d8bfd;
+    --primary-color-soft: #6ba6ff;
+    --bg-highlight: rgba(61, 139, 253, 0.18);
+  }
+  
+  /* If the toggle is unchecked, force light mode even when the OS is in
+     dark mode — this lets the manual switch always win over Condition A. */
+  :root:has(#theme-toggle:not(:checked)) {
+    --bg-page: #f8f9fa;
+    --bg-card: #ffffff;
+    --bg-elevated: #ffffff;
+    --text-main: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --border-card: #e9ecef;
+    --input-bg: #ffffff;
+    --link-color: #495057;
+    --badge-bg: #212529;
+    --badge-text: #ffffff;
+    --footer-bg: #212529;
+    --footer-text: rgba(255, 255, 255, 0.7);
+    --shadow-color: rgba(0, 0, 0, 0.075);
+    --shadow-color-strong: rgba(0, 0, 0, 0.2);
+    --hero-overlay-from: rgba(10, 12, 16, 0.55);
+    --hero-overlay-to: rgba(10, 12, 16, 0.78);
+    --toggle-track: #212529;
+    --toggle-ball: #ffffff;
+    --primary-color: #0d6efd;
+    --primary-color-soft: #3d8bfd;
+    --bg-highlight: rgba(13, 110, 253, 0.1);
   }
   
   /* =========================================
      2. GLOBAL RESETS & GENERAL STYLES
      ========================================= */
+  * {
+    box-sizing: border-box;
+  }
+  
   body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     scroll-behavior: smooth;
     background-color: var(--bg-page);
     color: var(--text-main);
-    /* Smoothly animates colors when switching between light and dark settings */
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Forces structural text blocks to adhere to system variables */
+  h1, h2, h3, h4, h5, h6, .section-title {
+    color: var(--text-main);
+    transition: color 0.3s ease;
+  }
+  
+  a {
+    text-decoration: none;
   }
   
   /* =========================================
@@ -56,7 +145,7 @@
     position: absolute;
     top: -50px;
     left: 10px;
-    background: #ffc107; /* High contrast warning background standard */
+    background: #ffc107;
     color: #000;
     padding: 8px 16px;
     font-weight: bold;
@@ -73,13 +162,28 @@
   /* =========================================
      4. NAVIGATION MENU LAYOUT
      ========================================= */
-  .nav-link {
-    position: relative;
-    transition: opacity 0.3s ease;
+  .portfolio-header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
   
-  .nav-link:hover {
-    opacity: 0.8;
+  .branding-logo {
+    color: var(--text-main) !important;
+    letter-spacing: -0.02em;
+  }
+  
+  .nav-link {
+    position: relative;
+    color: var(--text-muted) !important;
+    font-weight: 500;
+    padding-bottom: 0.35rem;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+  
+  .nav-link:hover, .nav-link.active-link {
+    color: var(--text-main) !important;
+    opacity: 1;
   }
   
   .active-link::after {
@@ -89,27 +193,111 @@
     bottom: -4px;
     width: 100%;
     height: 2px;
-    background-color: white;
+    background-color: var(--primary-color);
+    transition: background-color 0.3s ease;
   }
   
   /* =========================================
-     5. HERO SECTION SCALABILITY
+     5. THEME TOGGLE INTERFACE SWITCH UI
+     ========================================= */
+  .theme-switch-container {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .theme-toggle-input {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  
+  .theme-toggle-label {
+    background-color: var(--toggle-track);
+    width: 54px;
+    height: 28px;
+    border-radius: 50rem;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.25s ease, border-color 0.3s ease;
+  }
+  
+  .theme-toggle-label .bi-sun-fill { color: #ffc107; font-size: 0.85rem; position: relative; z-index: 1; }
+  .theme-toggle-label .bi-moon-fill { color: #f8f9fa; font-size: 0.85rem; position: relative; z-index: 1; }
+  
+  .theme-toggle-label .switch-ball {
+    background-color: var(--toggle-ball);
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    border-radius: 50%;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+  
+  .theme-toggle-input:checked + .theme-toggle-label {
+    background-color: var(--primary-color);
+  }
+  
+  .theme-toggle-input:checked + .theme-toggle-label .switch-ball {
+    transform: translateX(26px);
+  }
+  
+  .theme-toggle-input:focus-visible + .theme-toggle-label {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+  
+  /* =========================================
+     6. HERO SECTION SCALABILITY
      ========================================= */
   .hero-section {
-    min-height: calc(100vh - 76px); 
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+    min-height: calc(100vh - 76px);
+    background-image: linear-gradient(var(--hero-overlay-from), var(--hero-overlay-to)),
                       url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transition: background-image 0.3s ease;
   }
   
   .hero-content {
     z-index: 1;
   }
   
+  .hero-eyebrow {
+    display: inline-block;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 0.4rem 1.1rem;
+    border-radius: 50rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-title {
+    color: #ffffff;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+  }
+  
+  .hero-subtitle {
+    color: rgba(255, 255, 255, 0.88);
+  }
+  
   /* =========================================
-     6. ABOUT ME CONTAINER
+     7. ABOUT ME CONTAINER
      ========================================= */
   .about-section {
     background-color: var(--bg-page);
@@ -119,11 +307,11 @@
   
   .about-card {
     background-color: var(--bg-card);
-    border: none;
+    border: 1px solid var(--border-card);
     border-radius: 1.5rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    box-shadow: 0 0.5rem 1.5rem var(--shadow-color);
     padding: 2rem;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
   
   @media (min-width: 768px) {
@@ -147,10 +335,10 @@
     height: 160px;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid var(--bg-card);
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 4px solid var(--bg-elevated);
+    box-shadow: 0 0.25rem 0.75rem var(--shadow-color);
     margin-bottom: 1.5rem;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   
   .profile-name {
@@ -187,6 +375,7 @@
   .contact-details li {
     margin-bottom: 0.5rem;
     color: var(--text-muted);
+    transition: color 0.3s ease;
   }
   
   .contact-details strong {
@@ -210,7 +399,8 @@
     background-color: var(--badge-bg);
     color: var(--badge-text);
     padding: 0.5rem 1rem;
-    font-weight: normal;
+    font-weight: 500;
+    border-radius: 0.4rem;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   
@@ -249,10 +439,11 @@
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 1rem;
+    transition: color 0.3s ease;
   }
   
   /* =========================================
-     7. PROJECTS GRID ARTIFACTS
+     8. PROJECTS GRID ARTIFACTS
      ========================================= */
   .projects-section {
     background-color: var(--bg-card);
@@ -273,7 +464,7 @@
   
   .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.5rem 1.5rem var(--shadow-color-strong);
   }
   
   .project-img {
@@ -303,6 +494,7 @@
     color: var(--text-muted);
     margin-bottom: 1.5rem;
     flex-grow: 1;
+    transition: color 0.3s ease;
   }
   
   .project-actions {
@@ -315,12 +507,16 @@
     flex-grow: 1;
     font-weight: 600;
     padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
   }
   
   .custom-icon-btn {
     padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
     color: var(--text-main);
     border-color: var(--border-color);
+    background: transparent;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   }
   .custom-icon-btn:hover {
     background-color: var(--text-main);
@@ -328,7 +524,7 @@
   }
   
   /* =========================================
-     8. CONTACT INTERACTIVE INTERFACE
+     9. CONTACT INTERACTIVE INTERFACE
      ========================================= */
   .contact-section {
     background-color: var(--bg-page);
@@ -341,14 +537,16 @@
     font-size: 1.1rem;
     max-width: 600px;
     margin: 1rem auto 0;
+    transition: color 0.3s ease;
   }
   
   .contact-form {
     background-color: var(--bg-card);
     padding: 2.5rem;
     border-radius: 1rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    transition: background-color 0.3s ease;
+    border: 1px solid var(--border-card);
+    box-shadow: 0 0.5rem 1.5rem var(--shadow-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
   
   .custom-input {
@@ -362,11 +560,15 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.3s ease, color 0.3s ease;
   }
   
+  .custom-input::placeholder {
+    color: var(--text-muted);
+  }
+  
   .custom-input:focus {
     outline: none;
-    background-color: var(--bg-card);
-    border-color: #86b7fe;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    background-color: var(--input-bg);
+    border-color: var(--primary-color-soft);
+    box-shadow: 0 0 0 0.25rem var(--bg-highlight);
   }
   
   .custom-textarea {
@@ -380,7 +582,7 @@
   
   .custom-submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.3);
+    box-shadow: 0 0.5rem 1rem var(--bg-highlight);
   }
   
   .social-icons {
@@ -401,13 +603,14 @@
   }
   
   /* =========================================
-     9. STRUCTURAL UTILITY FOOTER BAR
+     10. STRUCTURAL UTILITY FOOTER BAR
      ========================================= */
   .portfolio-footer {
-    background-color: #212529; /* Explicit dark block stays static to meet target design constraints */
-    color: rgba(255, 255, 255, 0.7);
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
     padding: 2rem 0;
     font-size: 0.85rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   .portfolio-footer p {
@@ -415,21 +618,22 @@
   }
   
   /* =========================================
-     10. PRINT MEDIA OVERRIDES (RÉSUMÉ VIEW)
+     11. PRINT MEDIA OVERRIDES (RÉSUMÉ VIEW)
      ========================================= */
   @media print {
-    header, 
-    #contact, 
-    .portfolio-footer, 
+    header,
+    #contact,
+    .portfolio-footer,
     .skip-link,
-    .project-actions {
+    .project-actions,
+    .theme-switch-container {
       display: none !important;
     }
   
-    body, 
-    .about-section, 
-    .projects-section, 
-    .about-card, 
+    body,
+    .about-section,
+    .projects-section,
+    .about-card,
     .project-card,
     .hero-section {
       background: transparent !important;
@@ -448,16 +652,20 @@
       page-break-after: avoid;
     }
   
-    .hero-section h1, 
+    .hero-eyebrow {
+      display: none !important;
+    }
+  
+    .hero-section h1,
     .hero-section p {
-      color: #000 !important; 
+      color: #000 !important;
       text-shadow: none !important;
     }
   
     .about-section {
       padding-bottom: 1rem !important;
     }
-    
+  
     .profile-img {
       width: 100px !important;
       height: 100px !important;
