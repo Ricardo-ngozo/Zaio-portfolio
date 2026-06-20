@@ -1,16 +1,62 @@
-/* --- GLOBAL RESETS --- */
-body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    scroll-behavior: smooth; /* Smooth scrolling for nav links */
+/* =========================================
+   1. DESIGN SYSTEM VARIABLES & THEMES
+   ========================================= */
+
+/* Default Light Mode Colors */
+:root {
+    --bg-page: #f8f9fa;
+    --bg-card: #ffffff;
+    --text-main: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --border-card: #e9ecef;
+    --input-bg: #f8f9fa;
+    --link-color: #495057;
+    --badge-bg: #212529;
+    --badge-text: #ffffff;
+    
+    /* Primary accents stay brand-consistent */
+    --primary-color: #0d6efd;
+    --bg-highlight: rgba(13, 110, 253, 0.1);
   }
   
-  /* --- ACCESSIBILITY --- */
-  /* Hides the skip link off-screen until a user tabs to it with a keyboard */
+  /* Automatic Dark Mode Overrides */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-page: #121212;         /* Deep dark canvas background */
+      --bg-card: #1e1e1e;         /* Elevated surface card background */
+      --text-main: #f8f9fa;       /* Bright readable text */
+      --text-muted: #a0a0a0;      /* Muted secondary text */
+      --border-color: #2d2d2d;    /* Subtle dark separators */
+      --border-card: #333333;     /* Sleek project card outlines */
+      --input-bg: #2a2a2a;        /* Form input focus background */
+      --link-color: #adb5bd;      /* Muted utility links */
+      --badge-bg: #f8f9fa;        /* Inverted badge colors for readability */
+      --badge-text: #121212;
+      --bg-highlight: rgba(13, 110, 253, 0.25); /* Enhanced contrast indicator text background */
+    }
+  }
+  
+  /* =========================================
+     2. GLOBAL RESETS & GENERAL STYLES
+     ========================================= */
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    scroll-behavior: smooth;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    /* Smoothly animates colors when switching between light and dark settings */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* =========================================
+     3. ACCESSIBILITY STRATEGY
+     ========================================= */
   .skip-link {
     position: absolute;
     top: -50px;
     left: 10px;
-    background: #ffc107; /* High contrast Bootstrap warning color */
+    background: #ffc107; /* High contrast warning background standard */
     color: #000;
     padding: 8px 16px;
     font-weight: bold;
@@ -24,7 +70,9 @@ body {
     top: 10px;
   }
   
-  /* --- NAVBAR --- */
+  /* =========================================
+     4. NAVIGATION MENU LAYOUT
+     ========================================= */
   .nav-link {
     position: relative;
     transition: opacity 0.3s ease;
@@ -34,7 +82,6 @@ body {
     opacity: 0.8;
   }
   
-  /* Active underline styling */
   .active-link::after {
     content: "";
     position: absolute;
@@ -45,13 +92,11 @@ body {
     background-color: white;
   }
   
-  /* --- HERO SECTION --- */
+  /* =========================================
+     5. HERO SECTION SCALABILITY
+     ========================================= */
   .hero-section {
-    /* Subtracts approx navbar height so it fits perfectly on screen */
     min-height: calc(100vh - 76px); 
-    
-    /* Background Image + Dark Overlay (Linear Gradient) */
-    /* Feel free to replace the Unsplash URL with your own image */
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                       url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop');
     background-size: cover;
@@ -62,36 +107,35 @@ body {
   .hero-content {
     z-index: 1;
   }
-
-  /* --- ABOUT ME SECTION: STRUCTURAL STYLES --- */
-
-.about-section {
-    background-color: #f8f9fa; /* Light page background from prompt */
-    padding: 5rem 0;           /* Top and bottom breathing room */
+  
+  /* =========================================
+     6. ABOUT ME CONTAINER
+     ========================================= */
+  .about-section {
+    background-color: var(--bg-page);
+    padding: 5rem 0;
+    transition: background-color 0.3s ease;
   }
   
   .about-card {
-    background-color: #ffffff;
+    background-color: var(--bg-card);
     border: none;
-    border-radius: 1.5rem;     /* Rounded corners */
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Subtle shadow */
+    border-radius: 1.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     padding: 2rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
   
-  /* Add extra padding inside the card on larger screens */
   @media (min-width: 768px) {
     .about-card {
       padding: 3rem;
     }
   }
   
-  /* --- LEFT COLUMN: PROFILE STYLES --- */
-  
   .profile-column {
     text-align: center;
   }
   
-  /* Align text to the left only on desktop */
   @media (min-width: 992px) {
     .profile-column {
       text-align: left;
@@ -103,22 +147,25 @@ body {
     height: 160px;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #ffffff;
+    border: 4px solid var(--bg-card);
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     margin-bottom: 1.5rem;
+    transition: border-color 0.3s ease;
   }
   
   .profile-name {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
+    color: var(--text-main);
   }
   
   .profile-role {
-    color: #6c757d;
+    color: var(--text-muted);
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--border-color);
+    transition: border-color 0.3s ease, color 0.3s ease;
   }
   
   .contact-details {
@@ -128,22 +175,22 @@ body {
     max-width: 280px;
     margin-left: auto;
     margin-right: auto;
-    text-align: left; /* Keeps the list items aligned left even when centered */
+    text-align: left;
   }
   
   @media (min-width: 992px) {
     .contact-details {
-      margin-left: 0; /* Resets centering on desktop */
+      margin-left: 0;
     }
   }
   
   .contact-details li {
     margin-bottom: 0.5rem;
-    color: #495057;
+    color: var(--text-muted);
   }
   
   .contact-details strong {
-    color: #212529;
+    color: var(--text-main);
   }
   
   .skills-wrapper {
@@ -160,305 +207,156 @@ body {
   }
   
   .custom-badge {
-    background-color: #212529;
+    background-color: var(--badge-bg);
+    color: var(--badge-text);
     padding: 0.5rem 1rem;
     font-weight: normal;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
-  /* --- RIGHT COLUMN: ABOUT TEXT STYLES --- */
-  
   .about-text-column {
-    margin-top: 3rem; /* Spacing between columns on mobile */
+    margin-top: 3rem;
   }
   
   @media (min-width: 992px) {
     .about-text-column {
-      margin-top: 0; /* Remove mobile spacing on desktop */
+      margin-top: 0;
     }
   }
   
   .highlight-label {
     display: inline-block;
-    background-color: rgba(13, 110, 253, 0.1); 
-    color: #0d6efd; 
+    background-color: var(--bg-highlight);
+    color: var(--primary-color);
     padding: 0.25rem 1rem;
-    border-radius: 50rem; /* Pill shape */
+    border-radius: 50rem;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 1px;
     margin-bottom: 1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   .about-headline {
     font-weight: 700;
     margin-bottom: 1.5rem;
+    color: var(--text-main);
   }
   
   .about-paragraph {
-    color: #6c757d;
+    color: var(--text-muted);
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 1rem;
   }
-
-  /* --- PROJECTS SECTION --- */
-
-.projects-section {
-    background-color: #ffffff; /* Alternating back to white */
+  
+  /* =========================================
+     7. PROJECTS GRID ARTIFACTS
+     ========================================= */
+  .projects-section {
+    background-color: var(--bg-card);
     padding: 5rem 0;
+    transition: background-color 0.3s ease;
   }
   
-  /* Card Container Styling */
   .project-card {
-    background-color: #ffffff;
-    border: 1px solid #e9ecef;
+    background-color: var(--bg-page);
+    border: 1px solid var(--border-card);
     border-radius: 1rem;
-    overflow: hidden; /* Ensures the image doesn't break out of the rounded corners */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 100%; /* Forces all cards in a row to be the same height */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
   }
   
-  /* Hover effect for that "hire-me-now" polish */
   .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
   }
   
-  /* Banner Image Handling */
   .project-img {
     width: 100%;
     height: 220px;
-    object-fit: cover; /* Prevents images from squishing */
-    border-bottom: 1px solid #e9ecef;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-card);
+    transition: border-color 0.3s ease;
   }
   
-  /* Content Area */
   .project-content {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Pushes the buttons to the bottom if text length varies */
+    flex-grow: 1;
   }
   
   .project-title {
     font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
-    color: #212529;
+    color: var(--text-main);
   }
   
   .project-subtitle {
     font-size: 0.85rem;
-    color: #6c757d;
+    color: var(--text-muted);
     margin-bottom: 1.5rem;
-    flex-grow: 1; /* Ensures buttons align at the bottom */
+    flex-grow: 1;
   }
   
-  /* Button Layout */
   .project-actions {
     display: flex;
     gap: 0.5rem;
     align-items: center;
   }
   
-  /* Custom Button Overrides for consistency */
   .custom-btn {
-    flex-grow: 1; /* Makes the primary button take up available space */
+    flex-grow: 1;
     font-weight: 600;
     padding: 0.5rem 1rem;
   }
   
   .custom-icon-btn {
     padding: 0.5rem 0.75rem;
+    color: var(--text-main);
+    border-color: var(--border-color);
   }
-
-  /* --- CONTACT SECTION --- */
-
-.contact-section {
-    background-color: #f8f9fa; /* Matches the About section background */
+  .custom-icon-btn:hover {
+    background-color: var(--text-main);
+    color: var(--bg-card);
+  }
+  
+  /* =========================================
+     8. CONTACT INTERACTIVE INTERFACE
+     ========================================= */
+  .contact-section {
+    background-color: var(--bg-page);
     padding: 5rem 0;
+    transition: background-color 0.3s ease;
   }
   
   .contact-invite {
-    color: #6c757d;
+    color: var(--text-muted);
     font-size: 1.1rem;
     max-width: 600px;
     margin: 1rem auto 0;
   }
   
-  /* Custom Form Controls */
   .contact-form {
-    background-color: #ffffff;
+    background-color: var(--bg-card);
     padding: 2.5rem;
     border-radius: 1rem;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: background-color 0.3s ease;
   }
   
   .custom-input {
     width: 100%;
     padding: 1rem 1.25rem;
     font-size: 1rem;
-    color: #212529;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
+    color: var(--text-main);
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
     border-radius: 0.5rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-  
-  .custom-input:focus {
-    outline: none;
-    background-color: #ffffff;
-    border-color: #86b7fe; /* Bootstrap focus blue */
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-  }
-  
-  .custom-textarea {
-    resize: vertical; /* Only allows vertical resizing so the layout doesn't break */
-  }
-  
-  .custom-submit-btn {
-    border-radius: 50rem; /* Pill shaped button */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .custom-submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.3);
-  }
-  
-  /* Social Icons */
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-  
-  .social-icons a {
-    color: #495057;
-    font-size: 1.75rem;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-  
-  .social-icons a:hover {
-    color: #0d6efd; /* Brand primary color on hover */
-    transform: translateY(-3px);
-  }
-  
-  /* --- FOOTER --- */
-  
-  .portfolio-footer {
-    background-color: #212529; /* Deep dark background */
-    color: rgba(255, 255, 255, 0.7); /* Slightly muted white text for contrast */
-    padding: 2rem 0;
-    font-size: 0.85rem;
-  }
-  
-  .portfolio-footer p {
-    margin: 0;
-  }
-
-
-
-  /* =========================================
-   PRINT STYLES (BONUS: RÉSUMÉ VIEW)
-   ========================================= */
-@media print {
-    /* 1. Hide web-only elements to save ink and space */
-    header, 
-    #contact, 
-    .portfolio-footer, 
-    .skip-link,
-    .project-actions {
-      display: none !important;
-    }
-  
-    /* 2. Reset backgrounds and colors for paper */
-    body, 
-    .about-section, 
-    .projects-section, 
-    .about-card, 
-    .project-card,
-    .hero-section {
-      background: transparent !important;
-      background-color: #fff !important;
-      color: #000 !important;
-      box-shadow: none !important;
-      border: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-  
-    /* 3. Reformat the Hero Section for print */
-    .hero-section {
-      min-height: auto !important; /* Removes the full-screen height */
-      padding-top: 2rem !important;
-      padding-bottom: 1rem !important;
-      page-break-after: avoid;
-    }
-  
-    /* Force Hero text to be black instead of white */
-    .hero-section h1, 
-    .hero-section p {
-      color: #000 !important; 
-      text-shadow: none !important;
-    }
-  
-    /* 4. Adjust the About Section */
-    .about-section {
-      padding-bottom: 1rem !important;
-    }
-    
-    .profile-img {
-      width: 100px !important; /* Scale down the image */
-      height: 100px !important;
-      border: 2px solid #000 !important;
-    }
-  
-    /* Make badges outline-style instead of solid dark blocks */
-    .custom-badge {
-      border: 1px solid #000;
-      color: #000 !important;
-      background-color: transparent !important;
-    }
-  
-    /* 5. Condense the Projects Grid to fit one page */
-    .projects-section {
-      page-break-before: auto;
-    }
-  
-    .projects-grid {
-      display: flex !important;
-      flex-wrap: wrap !important;
-    }
-  
-    /* Force projects into 3 columns strictly on paper */
-    .projects-grid > div {
-      flex: 0 0 33.333% !important;
-      max-width: 33.333% !important;
-    }
-  
-    .project-card {
-      border: 1px solid #ccc !important;
-      page-break-inside: avoid;
-    }
-  
-    .project-img {
-      height: 120px !important; /* Smaller images to save physical space */
-    }
-  
-    .project-content {
-      padding: 0.75rem !important;
-    }
-  
-    /* 6. Typography and Page adjustments for paper */
-    @page {
-      margin: 1cm; /* Standard print margins */
-    }
-  
-    h1, h2, h3, p, li {
-      page-break-inside: avoid; /* Prevents text from splitting across pages */
-    }
-  }
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in
