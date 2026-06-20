@@ -359,4 +359,149 @@
     background-color: var(--input-bg);
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .custom-input:focus {
+    outline: none;
+    background-color: var(--bg-card);
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+  
+  .custom-textarea {
+    resize: vertical;
+  }
+  
+  .custom-submit-btn {
+    border-radius: 50rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .custom-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.3);
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .social-icons a {
+    color: var(--link-color);
+    font-size: 1.75rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .social-icons a:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+  }
+  
+  /* =========================================
+     9. STRUCTURAL UTILITY FOOTER BAR
+     ========================================= */
+  .portfolio-footer {
+    background-color: #212529; /* Explicit dark block stays static to meet target design constraints */
+    color: rgba(255, 255, 255, 0.7);
+    padding: 2rem 0;
+    font-size: 0.85rem;
+  }
+  
+  .portfolio-footer p {
+    margin: 0;
+  }
+  
+  /* =========================================
+     10. PRINT MEDIA OVERRIDES (RÉSUMÉ VIEW)
+     ========================================= */
+  @media print {
+    header, 
+    #contact, 
+    .portfolio-footer, 
+    .skip-link,
+    .project-actions {
+      display: none !important;
+    }
+  
+    body, 
+    .about-section, 
+    .projects-section, 
+    .about-card, 
+    .project-card,
+    .hero-section {
+      background: transparent !important;
+      background-color: #fff !important;
+      color: #000 !important;
+      box-shadow: none !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+  
+    .hero-section {
+      min-height: auto !important;
+      padding-top: 2rem !important;
+      padding-bottom: 1rem !important;
+      page-break-after: avoid;
+    }
+  
+    .hero-section h1, 
+    .hero-section p {
+      color: #000 !important; 
+      text-shadow: none !important;
+    }
+  
+    .about-section {
+      padding-bottom: 1rem !important;
+    }
+    
+    .profile-img {
+      width: 100px !important;
+      height: 100px !important;
+      border: 2px solid #000 !important;
+    }
+  
+    .custom-badge {
+      border: 1px solid #000;
+      color: #000 !important;
+      background-color: transparent !important;
+    }
+  
+    .projects-section {
+      page-break-before: auto;
+    }
+  
+    .projects-grid {
+      display: flex !important;
+      flex-wrap: wrap !important;
+    }
+  
+    .projects-grid > div {
+      flex: 0 0 33.333% !important;
+      max-width: 33.333% !important;
+    }
+  
+    .project-card {
+      border: 1px solid #ccc !important;
+      page-break-inside: avoid;
+    }
+  
+    .project-img {
+      height: 120px !important;
+    }
+  
+    .project-content {
+      padding: 0.75rem !important;
+    }
+  
+    @page {
+      margin: 1cm;
+    }
+  
+    h1, h2, h3, p, li {
+      page-break-inside: avoid;
+    }
+  }
