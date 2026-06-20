@@ -62,3 +62,142 @@ body {
   .hero-content {
     z-index: 1;
   }
+
+  /* --- ABOUT ME SECTION: STRUCTURAL STYLES --- */
+
+.about-section {
+    background-color: #f8f9fa; /* Light page background from prompt */
+    padding: 5rem 0;           /* Top and bottom breathing room */
+  }
+  
+  .about-card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 1.5rem;     /* Rounded corners */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Subtle shadow */
+    padding: 2rem;
+  }
+  
+  /* Add extra padding inside the card on larger screens */
+  @media (min-width: 768px) {
+    .about-card {
+      padding: 3rem;
+    }
+  }
+  
+  /* --- LEFT COLUMN: PROFILE STYLES --- */
+  
+  .profile-column {
+    text-align: center;
+  }
+  
+  /* Align text to the left only on desktop */
+  @media (min-width: 992px) {
+    .profile-column {
+      text-align: left;
+    }
+  }
+  
+  .profile-img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+  }
+  
+  .profile-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  
+  .profile-role {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .contact-details {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left; /* Keeps the list items aligned left even when centered */
+  }
+  
+  @media (min-width: 992px) {
+    .contact-details {
+      margin-left: 0; /* Resets centering on desktop */
+    }
+  }
+  
+  .contact-details li {
+    margin-bottom: 0.5rem;
+    color: #495057;
+  }
+  
+  .contact-details strong {
+    color: #212529;
+  }
+  
+  .skills-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  
+  @media (min-width: 992px) {
+    .skills-wrapper {
+      justify-content: flex-start;
+    }
+  }
+  
+  .custom-badge {
+    background-color: #212529;
+    padding: 0.5rem 1rem;
+    font-weight: normal;
+  }
+  
+  /* --- RIGHT COLUMN: ABOUT TEXT STYLES --- */
+  
+  .about-text-column {
+    margin-top: 3rem; /* Spacing between columns on mobile */
+  }
+  
+  @media (min-width: 992px) {
+    .about-text-column {
+      margin-top: 0; /* Remove mobile spacing on desktop */
+    }
+  }
+  
+  .highlight-label {
+    display: inline-block;
+    background-color: rgba(13, 110, 253, 0.1); 
+    color: #0d6efd; 
+    padding: 0.25rem 1rem;
+    border-radius: 50rem; /* Pill shape */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-headline {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-paragraph {
+    color: #6c757d;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
