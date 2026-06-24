@@ -298,7 +298,7 @@
   .hero-section {
     min-height: calc(100vh - 76px);
     background-image: linear-gradient(var(--hero-overlay-from), var(--hero-overlay-to)),
-                      url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop');
+                      url('./assests/ChatGPT\ Image\ Apr\ 27\,\ 2026\,\ 01_52_16\ PM.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
